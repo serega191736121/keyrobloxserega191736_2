@@ -1,0 +1,17 @@
+wait()
+local Humanoid = script.Parent.Humanoid
+Humanoid.BreakJointsOnDeath = false
+local DA = Instance.new("Animation")
+DA.AnimationId = "rbxassetid://7307444822" -- сюда вставляем ID вашей анимации.
+local DeathAnimation = Humanoid:LoadAnimation(DA)
+ 
+Humanoid.HealthChanged:Connect(function(Health)
+	if Health <= 0 then
+		print("died")
+		script.Parent.HumanoidRootPart.Anchored = true
+		DeathAnimation:Play()
+		wait(1) -- длительность вашей анимации.
+		script.Parent:Destroy()
+ 
+	end
+end)
